@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <a href="https://www.linkedin.com/in/SEU_LINKEDIN"><img src="https://img.shields.io/badge/LinkedIn-0F1B2D?style=flat-square&logo=linkedin&logoColor=38BDF8"/></a>
+  <a href="https://www.linkedin.com/in/luisrfpedro"><img src="https://img.shields.io/badge/LinkedIn-0F1B2D?style=flat-square&logo=linkedin&logoColor=38BDF8"/></a>
   <a href="mailto:luis.pedro@teltelecom.com.br"><img src="https://img.shields.io/badge/E--mail%20comercial-1E3A5F?style=flat-square&logo=gmail&logoColor=F1F5F9"/></a>
   <a href="https://SEU_SITE"><img src="https://img.shields.io/badge/Site-0E2A47?style=flat-square&logo=googlechrome&logoColor=38BDF8"/></a>
 </p>
@@ -103,7 +103,7 @@ Tenho uma trajetória executiva como gerente de filiais e unidades de negócio, 
 
 <p align="center"><sub>LINGUAGENS MAIS USADAS NOS REPOSITÓRIOS</sub></p>
 <p align="center">
-  <img height="150" src="https://github-readme-stats.vercel.app/api/top-langs/?username=SEU_USUARIO&layout=compact&locale=pt-br&border_radius=8&bg_color=0b1b33&border_color=1e3a5f&title_color=38bdf8&text_color=e2e8f0" alt="linguagens mais usadas"/>
+  <img height="150" src="https://github-readme-stats.vercel.app/api/top-langs/?username=luisrfpedro&layout=compact&locale=pt-br&border_radius=8&bg_color=0b1b33&border_color=1e3a5f&title_color=38bdf8&text_color=e2e8f0" alt="linguagens mais usadas"/>
 </p>
 
 <img src="./assets/divisor.svg" width="100%"/>
@@ -112,11 +112,11 @@ Tenho uma trajetória executiva como gerente de filiais e unidades de negócio, 
 <p align="center"><sub>ESTATÍSTICAS NO GITHUB</sub></p>
 
 <p align="center">
-  <img height="165" src="https://github-readme-stats.vercel.app/api?username=SEU_USUARIO&show_icons=true&locale=pt-br&border_radius=8&bg_color=0b1b33&border_color=1e3a5f&title_color=38bdf8&text_color=e2e8f0&icon_color=22d3ee&ring_color=38bdf8" alt="estatísticas"/>
+  <img height="165" src="https://github-readme-stats.vercel.app/api?username=luisrfpedro&show_icons=true&locale=pt-br&border_radius=8&bg_color=0b1b33&border_color=1e3a5f&title_color=38bdf8&text_color=e2e8f0&icon_color=22d3ee&ring_color=38bdf8" alt="estatísticas"/>
 </p>
 
 <p align="center">
-  <img src="https://streak-stats.demolab.com?user=SEU_USUARIO&locale=pt_BR&border_radius=8&background=0B1B33&border=1E3A5F&ring=38BDF8&fire=22D3EE&currStreakNum=F1F5F9&sideNums=38BDF8&currStreakLabel=38BDF8&sideLabels=CBD5E1&dates=94A3B8&stroke=1E3A5F" alt="sequência"/>
+  <img src="https://streak-stats.demolab.com?user=luisrfpedro&locale=pt_BR&border_radius=8&background=0B1B33&border=1E3A5F&ring=38BDF8&fire=22D3EE&currStreakNum=F1F5F9&sideNums=38BDF8&currStreakLabel=38BDF8&sideLabels=CBD5E1&dates=94A3B8&stroke=1E3A5F" alt="sequência"/>
 </p>
 
 <img src="./assets/divisor.svg" width="100%"/>
@@ -125,11 +125,11 @@ Tenho uma trajetória executiva como gerente de filiais e unidades de negócio, 
 <p align="center"><sub>CONTRIBUIÇÕES</sub></p>
 
 <p align="center">
-  <img width="100%" src="https://raw.githubusercontent.com/SEU_USUARIO/SEU_USUARIO/output/grafico.svg" alt="contribuições no último ano"/>
+  <img width="100%" src="https://raw.githubusercontent.com/luisrfpedro/luisrfpedro/output/grafico.svg" alt="contribuições no último ano"/>
 </p>
 
 <p align="center">
-  <img width="100%" src="https://raw.githubusercontent.com/SEU_USUARIO/SEU_USUARIO/output/rede.svg" alt="rede de contribuições"/>
+  <img width="100%" src="https://raw.githubusercontent.com/luisrfpedro/luisrfpedro/output/rede.svg" alt="rede de contribuições"/>
 </p>
 
 <img src="./assets/divisor.svg" width="100%"/>
