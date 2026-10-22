@@ -79,8 +79,8 @@ jobs:
             // resumo do lado esquerdo
             const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
             const linhas = [
-              `${cal.totalContributions} contribuições no último ano`,
-              `${user.repositories.totalCount} repositórios públicos`,
+              `${cal.totalContributions} ${cal.totalContributions === 1 ? 'contribuição' : 'contribuições'} no último ano`,
+              `${user.repositories.totalCount} ${user.repositories.totalCount === 1 ? 'repositório público' : 'repositórios públicos'}`,
               `No GitHub desde ${user.createdAt.slice(0, 4)}`,
             ];
             if (user.company) linhas.push(user.company);
