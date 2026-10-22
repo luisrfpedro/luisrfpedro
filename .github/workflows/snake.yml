@@ -1,0 +1,117 @@
+name: Atividade e rede de contribuições
+
+on:
+  schedule:
+    - cron: "0 */12 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  gerar:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Gráfico das contribuições do último ano, desenhado com as cores do tema.
+      #    Troque TEMA para "roxo", "vangogh" ou "corporativo" se mudar de tema.
+      - name: Gráfico de contribuições
+        uses: actions/github-script@v7
+        env:
+          TEMA: corporativo
+        with:
+          script: |
+            const fs = require('fs');
+            const temas = {
+              vangogh: { titulo: 'Colheita de contribuições', fundo: '#14307a', borda: '#b07a22', destaque: '#f6d55c', texto: '#e9efe0', suave: '#a9c4ec', area: '#e7b53c', ponto: '#e39a2c', grade: '#2452ad' },
+              roxo: { titulo: 'Flores que brotaram este ano', fundo: '#120a2e', borda: '#4a2c94', destaque: '#c9b8ff', texto: '#efe9ff', suave: '#9d84ff', area: '#8f6dff', ponto: '#f3b6e6', grade: '#2a1a5a' },
+              corporativo: { titulo: 'Atividade no GitHub', fundo: '#0b1b33', borda: '#1e3a5f', destaque: '#38bdf8', texto: '#e2e8f0', suave: '#94a3b8', area: '#38bdf8', ponto: '#22d3ee', grade: '#1e3a5f' },
+            };
+            const t = temas[process.env.TEMA] || temas.vangogh;
+
+            // busca os números públicos do perfil
+            const { user } = await github.graphql(`query($login: String!) {
+              user(login: $login) {
+                name company createdAt
+                repositories(privacy: PUBLIC, ownerAffiliations: OWNER) { totalCount }
+                contributionsCollection { contributionCalendar { totalContributions weeks { contributionDays { contributionCount date } } } }
+              }
+            }`, { login: context.repo.owner });
+
+            // soma as contribuições de cada semana
+            const cal = user.contributionsCollection.contributionCalendar;
+            const semanas = cal.weeks.map((w) => ({
+              inicio: w.contributionDays[0].date,
+              total: w.contributionDays.reduce((s, d) => s + d.contributionCount, 0),
+            }));
+
+            // escalas do gráfico
+            const W = 880, H = 260, x0 = 375, x1 = 850, y0 = 50, y1 = 206;
+            const maximo = Math.max(4, ...semanas.map((s) => s.total));
+            const X = (i) => x0 + (i / Math.max(1, semanas.length - 1)) * (x1 - x0);
+            const Y = (v) => y1 - (v / maximo) * (y1 - y0);
+            const f = (n) => n.toFixed(1);
+
+            // linha suave e área embaixo dela
+            const pts = semanas.map((s, i) => [X(i), Y(s.total)]);
+            let linha = `M${f(pts[0][0])} ${f(pts[0][1])}`;
+            let comprimento = 0;
+            for (let i = 1; i < pts.length; i++) {
+              const [ax, ay] = pts[i - 1], [bx, by] = pts[i], mx = (ax + bx) / 2;
+              linha += `C${f(mx)} ${f(ay)} ${f(mx)} ${f(by)} ${f(bx)} ${f(by)}`;
+              comprimento += Math.hypot(bx - ax, by - ay);
+            }
+            comprimento = Math.ceil(comprimento * 1.2);
+            const area = `${linha}L${x1} ${y1}L${x0} ${y1}Z`;
+
+            // linhas de grade, números do eixo e nomes dos meses
+            const meio = Math.round(maximo / 2);
+            const grade = [0, meio, maximo].map((v) => `<line x1="${x0}" x2="${x1}" y1="${f(Y(v))}" y2="${f(Y(v))}" stroke="${t.grade}" stroke-dasharray="3 5"/><text x="${x0 - 10}" y="${f(Y(v) + 4)}" text-anchor="end" font-size="11" fill="${t.suave}">${v}</text>`).join('');
+            const nomes = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+            let meses = '', ultimo = Number(semanas[0].inicio.slice(5, 7)) - 1;
+            semanas.forEach((s, i) => {
+              const m = Number(s.inicio.slice(5, 7)) - 1;
+              if (m !== ultimo) meses += `<text x="${f(X(i))}" y="${y1 + 24}" text-anchor="middle" font-size="11" fill="${t.suave}">${nomes[m]}</text>`;
+              ultimo = m;
+            });
+
+            // resumo do lado esquerdo
+            const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            const linhas = [
+              `${cal.totalContributions} contribuições no último ano`,
+              `${user.repositories.totalCount} repositórios públicos`,
+              `No GitHub desde ${user.createdAt.slice(0, 4)}`,
+            ];
+            if (user.company) linhas.push(user.company);
+            const resumo = linhas.map((l, i) => `<circle cx="34" cy="${102 + i * 32 - 5}" r="3.5" fill="${t.ponto}"/><text x="48" y="${102 + i * 32}" font-size="15" fill="${t.texto}">${esc(l)}</text>`).join('');
+            const [ux, uy] = pts[pts.length - 1];
+
+            const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+            <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${t.area}" stop-opacity="0.6"/><stop offset="1" stop-color="${t.area}" stop-opacity="0.04"/></linearGradient></defs>
+            <rect x="1" y="1" width="${W - 2}" height="${H - 2}" rx="6" fill="${t.fundo}" stroke="${t.borda}" stroke-width="1.5"/>
+            <text x="28" y="58" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-weight="600" font-size="21" fill="${t.destaque}">${t.titulo}</text>
+            ${resumo}
+            <text x="${x1}" y="30" text-anchor="end" font-size="11" letter-spacing="1.5" fill="${t.suave}">ÚLTIMOS 12 MESES</text>
+            ${grade}${meses}
+            <path d="${area}" fill="url(#g)"><animate attributeName="opacity" from="0" to="1" dur="2.4s" fill="freeze"/></path>
+            <path d="${linha}" fill="none" stroke="${t.destaque}" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="${comprimento}"><animate attributeName="stroke-dashoffset" from="${comprimento}" to="0" dur="2.4s" fill="freeze"/></path>
+            <circle cx="${f(ux)}" cy="${f(uy)}" r="4" fill="${t.ponto}"><animate attributeName="r" values="4;7;4" dur="2s" repeatCount="indefinite"/></circle>
+            </svg>`;
+            fs.mkdirSync('dist', { recursive: true });
+            fs.writeFileSync('dist/grafico.svg', svg);
+
+      # 2. Animação que percorre os quadradinhos de contribuição.
+      - uses: Platane/snk@v3
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          outputs: |
+            dist/rede.svg?palette=github-dark&color_snake=#e2e8f0&color_background=#0b1b33&color_dots=#0f2742,#1e3a5f,#0ea5e9,#38bdf8,#7dd3fc
+
+      # 3. Publica as duas imagens no ramo "output", de onde o README as lê.
+      - uses: crazy-max/ghaction-github-pages@v4
+        with:
+          target_branch: output
+          build_dir: dist
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
