@@ -14,8 +14,6 @@
   <a href="https://mail.google.com/mail/?view=cm&fs=1&to=luis.pedro@teltelecom.com.br"><img src="https://img.shields.io/badge/E--mail%20comercial-1E3A5F?style=flat-square&logo=gmail&logoColor=F1F5F9"/></a>
   <a href="https://github.com/luisrfpedro?tab=repositories"><img src="https://img.shields.io/badge/Site-0E2A47?style=flat-square&logo=googlechrome&logoColor=38BDF8"/></a>
 </p>
-<p align="center"><sub>luis.pedro@teltelecom.com.br</sub></p>
-
 <br/>
 
 <p align="center">
