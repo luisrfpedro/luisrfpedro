@@ -14,6 +14,7 @@
   <a href="https://mail.google.com/mail/?view=cm&fs=1&to=luis.pedro@teltelecom.com.br"><img src="https://img.shields.io/badge/E--mail%20comercial-1E3A5F?style=flat-square&logo=gmail&logoColor=F1F5F9"/></a>
   <a href="https://github.com/luisrfpedro?tab=repositories"><img src="https://img.shields.io/badge/Site-0E2A47?style=flat-square&logo=googlechrome&logoColor=38BDF8"/></a>
 </p>
+<p align="center"><sub>luis.pedro@teltelecom.com.br</sub></p>
 
 <br/>
 
@@ -101,14 +102,10 @@ Tenho uma trajetória executiva como gerente de filiais e unidades de negócio, 
 
 </details>
 
-<!--
-  LINGUAGENS MAIS USADAS: escondido porque a conta ainda não tem repositórios com código (o card aparece vazio).
-  Quando houver, tire este bloco do comentário.
 <p align="center"><sub>LINGUAGENS MAIS USADAS NOS REPOSITÓRIOS</sub></p>
 <p align="center">
   <img height="150" src="https://github-readme-stats.vercel.app/api/top-langs/?username=luisrfpedro&layout=compact&locale=pt-br&border_radius=8&bg_color=0b1b33&border_color=1e3a5f&title_color=38bdf8&text_color=e2e8f0" alt="linguagens mais usadas"/>
 </p>
--->
 
 <img src="./assets/divisor.svg" width="100%"/>
 
